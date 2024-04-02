@@ -14,5 +14,8 @@
   ],
   "dependencies": {
     "turbo": "^1.11.2"
+  },
+  "devDependencies": {
+    "@types/cookie-session": "^2.0.48"
   }
 }

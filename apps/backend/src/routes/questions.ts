@@ -10,34 +10,52 @@ import requireAuth from '../middlewares/require-auth';
 
 const qRouter = express.Router();
 
-qRouter.get('/', async (_, res) => {
+qRouter.get('/', async (_, res, next) => {
+  try {
     const questions = await Question.find();
-    res.json(questions);
+    res.status(200).json(questions);
+    next();
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching questions' });
+    // console.error(err);
+    next(err);
+  }
 });
 
 qRouter.post('/add', requireAuth, async (req, res, next) => {
-    const { questionText } = req.body;
-    const { user } = req.session!;
-    const newQuestion = new Question({ questionText, author: user });
-    await newQuestion.save();
-    if (!newQuestion) {
-        next(new Error('Question not created'));
-        return;
-    }
+  try {
+    const user = req.session!.user;
+    const question = new Question({
+      questionText: req.body.questionText,
+      answer: '',
+      author: user,
+    });
+    await question.save();
     res.status(201).json({ message: 'Question created' });
-
+    next();
+  } catch (err) {
+    res.status(400).json({ message: 'Question not created' });
+    next(err);
+  }
 });
 
 qRouter.post('/answer', requireAuth, async (req, res, next) => {
-    const { _id, answer } = req.body;
-    const question = await Question.findById(_id);
+  try {
+    const question = await Question.findById(req.body._id).exec();
     if (!question) {
-        next(new Error('Question not found'));
-        return;
+      res.status(404).json({ message: 'Question not found' });
+      next();
+      return;
     }
-    question.answer = answer;
+    question.answer = req.body.answer;
     await question.save();
-    res.status(200).json({ message: 'Answer added/updated' });
+    res.status(200).json({ message: 'Answer added' });
+    next();
+  } catch (err) {
+    res.status(400).json({ message: 'Answer not added' });
+    // console.error(err);
+    next(err);
+  }
 });
 
 export default qRouter;

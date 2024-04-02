@@ -1,5 +1,5 @@
 declare namespace CookieSessionInterfaces {
-    interface CookieSessionObject {
-      user?: string;
-    }
+  interface CookieSessionObject {
+    user?: string;
   }
+}

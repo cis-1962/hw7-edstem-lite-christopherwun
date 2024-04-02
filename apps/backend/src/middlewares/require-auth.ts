@@ -3,8 +3,8 @@
 import { Request, Response, NextFunction } from 'express';
 
 function requireAuth(req: Request, res: Response, next: NextFunction) {
-  if (!req.session!.user) {
-    next(new Error('Unauthorized'));
+  if (!req.session!.user || req.session!.user === '') {
+    next(new Error('Not logged in'));
   } else {
     next();
   }

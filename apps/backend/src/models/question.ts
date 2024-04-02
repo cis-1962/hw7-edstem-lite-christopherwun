@@ -9,6 +9,7 @@ const { Schema } = mongoose;
 
 interface IQuestion {
   questionText: string;
+  // answer is the answer to the question, optional
   answer: string;
   author: string;
 }
@@ -20,7 +21,7 @@ const questionSchema = new Schema<IQuestion>({
   },
   answer: {
     type: String,
-    required: true,
+    required: false,
   },
   author: {
     type: String,

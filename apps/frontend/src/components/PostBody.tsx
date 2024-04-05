@@ -70,13 +70,13 @@ export default function PostBody(
                   user ? 
                   <div className="answer">
                     <h3>Answer this question:</h3>
-                    <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} className = "input"/>
+                    <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} className = "answer-input"/>
                     <button className="answer" onClick={postAnswer}>Post Answer</button>
                   </div>  
                   :
                   <div className="answer">
                     <h3>Answer this question:</h3>
-                    <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} className = "input"/>
+                    <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} className = "answer-input"/>
                     <button className="button">Login to answer</button>
                   </div>
                 }

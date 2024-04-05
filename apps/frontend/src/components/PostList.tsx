@@ -23,7 +23,7 @@ export default function PostList(
           {
             user ? 
             <div className="post-button">
-              <button className="button" onClick={makePost}>Add a new question!</button>
+              <button className="button" onClick={makePost}>Add new Question +</button>
             </div> :
             <div className="post-button">
             <button className="button">Login to make a post</button>
@@ -37,7 +37,7 @@ export default function PostList(
                 // include keyevent
                 <div key={index} className="post-button">
                   <button onClick={() => setFocusedPost(post)} className="post-preview">
-                    <h4>{post.questionText}</h4>
+                    <p style={{padding: 0}}>{post.questionText}</p>
                     {/* <p>{post.author}</p> */}
                   </button>
                 </div>

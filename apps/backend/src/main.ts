@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cookieSession from 'cookie-session';
 import accRouter from './routes/account';
 import qRouter from './routes/questions';
+import cors from 'cors';
 
 // read environment variables from .env file
 dotenv.config();
@@ -22,10 +23,19 @@ app.use(express.json());
 app.use(
   cookieSession({
     name: 'session',
-    keys: ['key1', 'key2'],
+    keys: ['secret'],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-  }),
+    path: '/', // Set the path to '/' to make the cookie accessible from the entire domain
+    domain: 'localhost' // Set the domain to make the cookie accessible from all subdomains
+  })
 );
+
+// add middleware to set CORS headers
+const corsOptions = {
+  origin: 'http://localhost:3000', // Specify the exact origin
+  credentials: true // Allow credentials (cookies)
+};
+app.use(cors(corsOptions));
 
 // define root route
 app.get('/api/hello', (_, res) => {
@@ -40,11 +50,8 @@ app.use('/api/questions', qRouter);
 
 // define error handler
 function errorHandler(err, req, res, next) {
-  if (res.headersSent) {
-    return next(err);
-  }
-  res.status(500);
-  res.json({ error: err.message });
+  console.log(err.stack); // log the error for debugging purposes
+  res.status(err.status || 500).json({ error: err.message });
 }
 app.use(errorHandler);
 

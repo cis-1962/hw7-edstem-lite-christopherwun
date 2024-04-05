@@ -7,7 +7,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-interface IQuestion {
+export interface IQuestion {
   questionText: string;
   // answer is the answer to the question, optional
   answer: string;

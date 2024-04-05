@@ -6,7 +6,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-interface IUser {
+export interface IUser {
   username: string;
   password: string;
 }

@@ -4,7 +4,9 @@ import { Request, Response, NextFunction } from 'express';
 
 function requireAuth(req: Request, res: Response, next: NextFunction) {
   if (!req.session!.user || req.session!.user === '') {
-    next(new Error('Not logged in'));
+    res.status(401);
+    res.json({ message: 'Not logged in' });
+    // next(new Error('Not logged in'));
   } else {
     next();
   }

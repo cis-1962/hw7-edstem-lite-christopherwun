@@ -13,6 +13,9 @@
     "packages/*"
   ],
   "dependencies": {
+    "cors": "^2.8.5",
+    "react-bootstrap": "^2.10.2",
+    "simple-react-modal": "^0.5.1",
     "turbo": "^1.11.2"
   },
   "devDependencies": {

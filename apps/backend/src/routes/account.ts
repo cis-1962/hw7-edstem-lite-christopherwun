@@ -8,6 +8,7 @@ import express from 'express';
 import User from '../models/user';
 import bcrypt from 'bcryptjs';
 import requireAuth from '../middlewares/require-auth';
+import cookieSession from 'cookie-session';
 
 const accRouter = express.Router();
 
@@ -50,14 +51,14 @@ accRouter.post('/login', async (req, res, next) => {
     }
     const match = await bcrypt.compare(req.body.password, user.password);
     if (!match) {
-      res.status(401).json({ message: 'Incorrect password' });
+      res.status(402).json({ message: 'Incorrect password' });
       next();
       return;
     }
     req.session!.user = user.username;
     res.status(200).json({ message: 'Login successful' });
   } catch (err) {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(403).json({ message: 'Unauthorized' });
     // console.error(err);
     next(err);
   }
@@ -70,6 +71,17 @@ accRouter.post('/logout', requireAuth, (req, res, next) => {
     next();
   } catch (err) {
     res.status(400).json({ message: 'Logout failed' });
+    // console.error(err);
+    next(err);
+  }
+});
+
+accRouter.get('/user', requireAuth, (req, res, next) => {
+  try {
+    res.status(200).json({ username: req.session!.user });
+    next();
+  } catch (err) {
+    res.status(400).json({ message: 'User not found' });
     // console.error(err);
     next(err);
   }

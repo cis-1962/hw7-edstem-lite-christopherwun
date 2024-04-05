@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom'
+import '../app.css'
 
 export default function LogIn() {
   const [username, setUsername] = useState('')
@@ -38,7 +39,7 @@ export default function LogIn() {
       <h4>Password</h4>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input"/>
 
-      <button onClick={login}>Login</button>
+      <button onClick={login} className="button">Login</button>
 
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h4>Don't have an account?</h4>

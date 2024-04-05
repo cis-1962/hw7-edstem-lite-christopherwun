@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 import axios from 'axios'
 import IQuestion from '../../../backend/src/models/question'
+import '../app.css'
 
 export default function PostList(
     { 
@@ -22,7 +23,7 @@ export default function PostList(
           {
             user ? 
             <div className="post-button">
-              <button className="button" onClick={makePost}>Make a post</button>
+              <button className="button" onClick={makePost}>Add a new question!</button>
             </div> :
             <div className="post-button">
             <button className="button">Login to make a post</button>

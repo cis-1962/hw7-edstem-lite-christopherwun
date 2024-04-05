@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import '../app.css'
 
 export default function LogIn() {
   const [username, setUsername] = useState('')
@@ -38,7 +39,7 @@ export default function LogIn() {
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input"/>
 
 
-      <button onClick={signup}>Sign Up</button>
+      <button onClick={signup} className="button">Sign Up</button>
 
       <h4>Already have an account?</h4>
       <Link to="/login">Log in</Link>

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../app.css'
 
 export default function Navbar(
     { user, logout, toLogin} : 
@@ -8,8 +9,8 @@ export default function Navbar(
         <h1 className="title">Campuswire Lite</h1>
         {
           user ? 
-          <div>
-            <p>{user}</p>
+          <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row'}}>
+            <p>Hi, {user}!</p>
             <button onClick={logout}>Logout</button>
           </div> :
           <button onClick={toLogin}>Login</button>

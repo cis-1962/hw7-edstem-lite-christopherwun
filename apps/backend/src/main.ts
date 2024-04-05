@@ -26,14 +26,14 @@ app.use(
     keys: ['secret'],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     path: '/', // Set the path to '/' to make the cookie accessible from the entire domain
-    domain: 'localhost' // Set the domain to make the cookie accessible from all subdomains
-  })
+    domain: 'localhost', // Set the domain to make the cookie accessible from all subdomains
+  }),
 );
 
 // add middleware to set CORS headers
 const corsOptions = {
   origin: 'http://localhost:3000', // Specify the exact origin
-  credentials: true // Allow credentials (cookies)
+  credentials: true, // Allow credentials (cookies)
 };
 app.use(cors(corsOptions));
 

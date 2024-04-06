@@ -15,11 +15,9 @@ export default function PostList({
   setFocusedPost: (post: typeof IQuestion) => void;
 }) {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const { data, error, isLoading } = useSWR(
-    '/api/questions/',
-    fetcher,
-    { refreshInterval: 2000 },
-  );
+  const { data, error, isLoading } = useSWR('/api/questions/', fetcher, {
+    refreshInterval: 2000,
+  });
 
   const navigate = useNavigate();
 
@@ -33,7 +31,9 @@ export default function PostList({
         </div>
       ) : (
         <div className="post-button">
-          <button className="button" onClick={() => navigate('/login')}>Login to make a post</button>
+          <button className="button" onClick={() => navigate('/login')}>
+            Login to make a post
+          </button>
         </div>
       )}
       <div className="post-list">

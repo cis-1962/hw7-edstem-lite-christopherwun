@@ -5,14 +5,13 @@ import '../app.css';
 export default function Navbar({
   user,
   logout,
-//   toLogin,
+  //   toLogin,
 }: {
   user: string | null;
   logout: () => void;
-//   toLogin: () => void;
+  //   toLogin: () => void;
 }) {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="navbar">

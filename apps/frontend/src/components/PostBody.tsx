@@ -39,8 +39,6 @@ export default function PostBody({
         setFocusedPost({ ...focusedPost, answer: answer });
         setAnswer('');
       } else {
-        // alert the user if the answer failed
-        // allow alert and string concat (disable prettier for this line)
         // eslint-disable-next-line no-alert
         alert(`Answer failed`);
       }

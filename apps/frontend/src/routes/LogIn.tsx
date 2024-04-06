@@ -49,9 +49,7 @@ export default function LogIn() {
         className="input"
       />
 
-      <button onClick={login}>
-        Login
-      </button>
+      <button onClick={login}>Login</button>
 
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <h4>Don't have an account?</h4>

@@ -15,8 +15,8 @@ export default function Homepage() {
 
   // check if user is logged in, making sure to pass the proper authorization headers
   useEffect(() => {
-    axios.
-      get('/api/account/user', {
+    axios
+      .get('/api/account/user', {
         withCredentials: true,
       })
       .then((res) => {
@@ -85,7 +85,7 @@ export default function Homepage() {
       </Modal>
 
       {/* Topmost div for title + login/logout buttons*/}
-      <Navbar user={user} logout={logout}/>
+      <Navbar user={user} logout={logout} />
 
       {/* Main div for post button (if logged in), posts */}
       <div className="main">

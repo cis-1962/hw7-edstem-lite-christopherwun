@@ -2,6 +2,7 @@ import React from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 import IQuestion from '../../../backend/src/models/question';
+import { useNavigate } from 'react-router-dom';
 import '../app.css';
 
 export default function PostList({
@@ -15,10 +16,12 @@ export default function PostList({
 }) {
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data, error, isLoading } = useSWR(
-    'http://localhost:8000/api/questions/',
+    '/api/questions/',
     fetcher,
     { refreshInterval: 2000 },
   );
+
+  const navigate = useNavigate();
 
   return (
     <div className="posts">
@@ -30,7 +33,7 @@ export default function PostList({
         </div>
       ) : (
         <div className="post-button">
-          <button className="button">Login to make a post</button>
+          <button className="button" onClick={() => navigate('/login')}>Login to make a post</button>
         </div>
       )}
       <div className="post-list">

@@ -24,7 +24,7 @@ export default function PostBody({
 
   function postAnswer() {
     // use fetch to post the answer
-    fetch('http://localhost:8000/api/questions/answer', {
+    fetch('/api/questions/answer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export default function PostBody({
         // alert the user if the answer failed
         // allow alert and string concat (disable prettier for this line)
         // eslint-disable-next-line no-alert
-        alert(`Answer failed: ${res.statusText}`);
+        alert(`Answer failed`);
       }
     });
   }
@@ -74,13 +74,13 @@ export default function PostBody({
             </div>
           ) : (
             <div className="answer">
-              <h3>Answer this question:</h3>
+              {/* <h3>Answer this question:</h3>
               <textarea
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
                 className="answer-input"
               />
-              <button className="button">Login to answer</button>
+              <button >Login to answer</button> */}
             </div>
           )}
         </>

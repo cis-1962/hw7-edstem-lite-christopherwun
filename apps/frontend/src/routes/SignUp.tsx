@@ -25,7 +25,7 @@ export default function LogIn() {
         navigate('/login');
       } else {
         // eslint-disable-next-line no-alert
-        alert(`Signup failed: ${res.statusText}`);
+        alert(`Signup failed`);
       }
     });
   }

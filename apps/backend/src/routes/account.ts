@@ -8,7 +8,6 @@ import express from 'express';
 import User from '../models/user';
 import bcrypt from 'bcryptjs';
 import requireAuth from '../middlewares/require-auth';
-import cookieSession from 'cookie-session';
 
 const accRouter = express.Router();
 

@@ -26,7 +26,7 @@ export default function LogIn() {
         navigate('/');
       } else {
         // eslint-disable-next-line no-alert
-        alert(`Login failed: ${res.statusText}`);
+        alert(`Login failed`);
       }
     });
   }
@@ -49,7 +49,7 @@ export default function LogIn() {
         className="input"
       />
 
-      <button onClick={login} className="button">
+      <button onClick={login}>
         Login
       </button>
 

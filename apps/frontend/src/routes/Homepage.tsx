@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Modal from 'simple-react-modal';
 import Navbar from '../components/Navbar';
 import '../app.css';
 import PostList from '../components/PostList';
 import PostBody from '../components/PostBody';
+import axios from 'axios';
 
 export default function Homepage() {
-  const navigate = useNavigate();
-
   const [user, setUser] = useState(null);
   const [focusedPost, setFocusedPost] = useState(null);
 
@@ -17,28 +15,19 @@ export default function Homepage() {
 
   // check if user is logged in, making sure to pass the proper authorization headers
   useEffect(() => {
-    fetch('http://localhost:8000/api/account/user', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    }).then((res) => {
-      if (res.status === 200) {
-        res.json().then((data) => {
-          setUser(data.username);
-        });
-      } else if (res.status === 401) {
-        setUser(null);
-      } else {
-        // eslint-disable-next-line no-alert
-        alert(`User fetch failed: ${res.statusText}`);
-      }
-    });
+    axios.
+      get('/api/account/user', {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setUser(res.data.username);
+        }
+      });
   }, [user]);
 
   function logout() {
-    fetch('http://localhost:8000/api/account/logout', {
+    fetch('/api/account/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +41,7 @@ export default function Homepage() {
   }
 
   function sendPost() {
-    fetch('http://localhost:8000/api/questions/add', {
+    fetch('/api/questions/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,8 +55,6 @@ export default function Homepage() {
         setQuestion('');
         setShowModal(false);
       } else {
-        // alert the user if the post failed
-        // allow alert and string concat (disable prettier for this line)
         // eslint-disable-next-line no-alert
         alert(`Post failed: ${res.statusText}`);
       }
@@ -98,7 +85,7 @@ export default function Homepage() {
       </Modal>
 
       {/* Topmost div for title + login/logout buttons*/}
-      <Navbar user={user} logout={logout} toLogin={() => navigate('/login')} />
+      <Navbar user={user} logout={logout}/>
 
       {/* Main div for post button (if logged in), posts */}
       <div className="main">

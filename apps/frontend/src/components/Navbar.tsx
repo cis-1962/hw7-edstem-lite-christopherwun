@@ -1,15 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../app.css';
 
 export default function Navbar({
   user,
   logout,
-  toLogin,
+//   toLogin,
 }: {
   user: string | null;
   logout: () => void;
-  toLogin: () => void;
+//   toLogin: () => void;
 }) {
+
+    const navigate = useNavigate();
+
   return (
     <div className="navbar">
       <h1 className="title">Campuswire Lite</h1>
@@ -25,7 +29,7 @@ export default function Navbar({
           <button onClick={logout}>Logout</button>
         </div>
       ) : (
-        <button onClick={toLogin}>Login</button>
+        <button onClick={() => navigate('/login')}>Login</button>
       )}
     </div>
   );
